@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: root
+  redis:
+    database: 0
+    host: localhost
+    password: 
+    port: 6379
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+    sentinel:
+      master: 
+      nodes: 
+    timeout: 0
+    
+    
+website: 
+  virtualCurrency: 
+    bicAndltc: https://data.btcchina.com/data/ticker?market=all
+    eth: https://plus-api.btcchina.com/market/ticker?symbol=ETHCNY
