@@ -1,8 +1,5 @@
 package com.seven.virtual_currency_website.processor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.seven.virtual_currency_website.entity.component.DbResult;
 
 /*
@@ -32,17 +29,17 @@ public abstract class AbstractDataProcessor <T> implements DefaultDataProcessor 
 	}
 
 	@Override
-	public String process(String hr){
+	public void doDataProcess(String str){
+	}
+	
+	@Override
+	@Deprecated
+	public T process(String hr){
 		return null;
 	}
 	
 	@Override
-	public List<T> processReturnObjectList(String hr){
-		return new ArrayList<T>();
-	}
-	
-	@Override
-	public DbResult<?> toDB(List<T> datas){
+	public DbResult<?> toDB(T datas){
 		return null;
 	}
 

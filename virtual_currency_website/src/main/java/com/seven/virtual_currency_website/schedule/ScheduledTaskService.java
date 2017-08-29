@@ -13,13 +13,16 @@ import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.seven.virtual_currency_website.component.WebsiteForProcessorComponent;
-import com.seven.virtual_currency_website.entity.vc_website.BaseVirtualCurrencyWebsite;
-import com.seven.virtual_currency_website.processor.AbstractDataProcessor;
+import com.seven.virtual_currency_website.processor.DefaultDataProcessor;
 
 /*
  * 主任务类
@@ -39,17 +42,17 @@ import com.seven.virtual_currency_website.processor.AbstractDataProcessor;
  * 
  */
 @Service
-public class ScheduledTaskService {
+public class ScheduledTaskService implements InitializingBean, ApplicationContextAware{
 	
 	@Autowired
 	private WebsiteForProcessorComponent websiteForProcessorComponent;
 	
-	private Map<String, AbstractDataProcessor<?>> processorMap;
+	private ApplicationContext ac;
+	
+	private Map<String, Class<?>> processorMap;
 
-	@Scheduled(cron = "0 17 13 ? * *")
+	@Scheduled(cron = "10 24 12 ? * *")
 	public void getWebsiteInformation() {
-		
-		processorMap = websiteForProcessorComponent.loadProcessMap();
 		
 		//通过httpclient向注册的website发送http 异步 请求
 		CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();
@@ -82,7 +85,7 @@ public class ScheduledTaskService {
 		            System.out.println(responseString);
 		            
 		            //获取到相应数据后处理数据
-		            List<?> list = processorMap.get(URLstr).processReturnObjectList(responseString);
+		            ((DefaultDataProcessor<?>) ac.getBean(processorMap.get(URLstr))).doDataProcess(responseString);
 		        }
 
 		        public void failed(final Exception ex) {
@@ -98,5 +101,15 @@ public class ScheduledTaskService {
 		    };
 			httpclient.execute(request, callback);
 		}
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		processorMap = websiteForProcessorComponent.loadProcessMap();
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
+		this.ac = arg0;
 	}
 }

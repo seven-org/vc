@@ -3,6 +3,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
     username: root
     password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   redis:
     database: 0
     host: localhost
@@ -13,12 +17,9 @@ spring:
       min-idle: 0
       max-active: 8
       max-wait: -1
-    sentinel:
-      master: 
-      nodes: 
-    timeout: 0
     
-    
+debug: true
+
 website: 
   virtualCurrency: 
     bicAndltc: https://data.btcchina.com/data/ticker?market=all

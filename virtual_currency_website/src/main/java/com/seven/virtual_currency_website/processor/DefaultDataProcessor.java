@@ -1,7 +1,5 @@
 package com.seven.virtual_currency_website.processor;
 
-import java.util.List;
-
 import com.seven.virtual_currency_website.entity.component.DbResult;
 
 /*
@@ -11,11 +9,12 @@ import com.seven.virtual_currency_website.entity.component.DbResult;
  */
 public interface DefaultDataProcessor <T> {
 	
-	public String process(String hr);
+	public void doDataProcess(String str);
 	
-	public List<T> processReturnObjectList(String hr);
+	@Deprecated
+	public T process(String hr);
 
 	//存入DB
-	public DbResult<?> toDB(List<T> datas);
+	public DbResult<?> toDB(T datas);
 	
 }

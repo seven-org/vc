@@ -1,7 +1,6 @@
 package com.seven.virtual_currency_website;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.http.HttpEntity;
@@ -16,25 +15,25 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.seven.virtual_currency_website.component.WebsiteForProcessorComponent;
 import com.seven.virtual_currency_website.entity.vc_website.WebsiteURL;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-//@RunWith(SpringJUnit4ClassRunner.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
 public class VirtualCurrencyWebsiteApplicationTests {
 
 	String url = "https://data.btcchina.com/data/ticker?market=all";
 	String url2 = "https://plus-api.btcchina.com/market/ticker?symbol=ETHCNY";
-	
+	String urlContent = "{'ticker_btccny':{'high':'28937.00','low':'27500.00','buy':'28650.14','sell':'28651.00','last':'28651.00','vol':'11058.34380000','date':1503945598,'vwap':'28353.89','prev_close':'28800.01','open':'28901.99'},'ticker_ltccny':{'high':'429.99','low':'384.51','buy':'416.01','sell':'421.50','last':'421.50','vol':'42629.19600000','date':1503945598,'vwap':'410.61','prev_close':'408.99','open':'408.99'},'ticker_ltcbtc':{'high':'0.01560000','low':'0.01370000','buy':'0.01420000','sell':'0.01560000','last':'0.01560000','vol':'40.40000000','date':1503945598,'vwap':'0.0147','prev_close':'0.0137','open':'0.0138'}}";
 	public  Document getDocument (String url){
 		try {
 			return Jsoup.connect(url).get();
@@ -44,11 +43,11 @@ public class VirtualCurrencyWebsiteApplicationTests {
 		return null;
 	}
 	
-	@Autowired
-	private WebsiteURL websiteURL;
-	
-	@Autowired
-	private WebsiteForProcessorComponent websiteForProcessorComponent;
+//	@Autowired
+//	private WebsiteURL websiteURL;
+//	
+//	@Autowired
+//	private WebsiteForProcessorComponent websiteForProcessorComponent;
 	
 	@Test
 	public void contextLoads() throws Exception {
@@ -62,11 +61,14 @@ public class VirtualCurrencyWebsiteApplicationTests {
 		
 //		test2();
 //		System.out.println("-----------after test 2-------------");
-		List<String> ls = websiteForProcessorComponent.websiteURL.getVirtualCurrency();
+//		List<String> ls = websiteForProcessorComponent.websiteURL.getVirtualCurrency();
 //		List<String> ls = websiteURL.getVirtualCurrency();
-		for (String s : ls){
-			System.out.println(s);
-		}
+//		for (String s : ls){
+//			System.out.println(s);
+//		}
+		JSONObject obj = new JSONObject(urlContent);
+		
+		System.out.println(obj);
 
 	}
 	

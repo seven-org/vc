@@ -12,36 +12,36 @@ import com.seven.virtual_currency_website.processor.AbstractDataProcessor;
 import com.seven.virtual_currency_website.processor.realsiteprocessor.BicProcessor;
 import com.seven.virtual_currency_website.processor.realsiteprocessor.EthProcessor;
 
-@Component
 /*
  * 将网站站点与processor匹配，并放入map
  */
+@Component
 public class WebsiteForProcessorComponent {
 	
 	@Autowired
 	public WebsiteURL websiteURL;
 	
-	private Map<String, AbstractDataProcessor<?>> processorMap;
+	private Map<String, Class<?>> processorMap;
 
-	public Map<String, AbstractDataProcessor<?>> getProcessorMap() {
+	public Map<String, Class<?>> getProcessorMap() {
 		return processorMap;
 	}
 
-	public void setProcessorMap(Map<String, AbstractDataProcessor<?>> processorMap) {
+	public void setProcessorMap(Map<String, Class<?>> processorMap) {
 		this.processorMap = processorMap;
 	}
 
-	public Map<String, AbstractDataProcessor<?>> loadProcessMap() {
+	public Map<String, Class<?>> loadProcessMap() {
 		processorMap.clear();
-		processorMap.put(websiteURL.getBicAndltc(), new BicProcessor(websiteURL.getBicAndltc()));
-		processorMap.put(websiteURL.getEth(), new EthProcessor(websiteURL.getEth()));
+		processorMap.put(websiteURL.getBicAndltc(), BicProcessor.class);
+		processorMap.put(websiteURL.getEth(), EthProcessor.class);
 		//TODO
 		return processorMap;
 	}
 	
 	public WebsiteForProcessorComponent() {
 		super();
-		processorMap = new HashMap<String, AbstractDataProcessor<?>>();
+		processorMap = new HashMap<String, Class<?>>();
 	}
 
 }

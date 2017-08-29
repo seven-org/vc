@@ -1,35 +1,62 @@
 package com.seven.virtual_currency_website.processor.realsiteprocessor;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.seven.virtual_currency_website.entity.component.DbResult;
-import com.seven.virtual_currency_website.entity.vc.BaseVirtualCurrency;
-import com.seven.virtual_currency_website.processor.AbstractDataProcessor;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class BicProcessor extends AbstractDataProcessor<BaseVirtualCurrency>{
+import com.seven.virtual_currency_website.dao.mysql.VirtualCurrencyMysqlDao;
+import com.seven.virtual_currency_website.domain.VirtualCurrency;
+import com.seven.virtual_currency_website.entity.vc.BaseVirtualCurrency;
+import com.seven.virtual_currency_website.processor.BaseMysqlDataProcessor;
+
+@Component
+public class BicProcessor extends BaseMysqlDataProcessor<VirtualCurrency, VirtualCurrencyMysqlDao>{
 	
-	public BicProcessor(String urlstr) {
-		super(urlstr);
-	}
+	@Autowired
+	private VirtualCurrencyMysqlDao virtualCurrencyMysqlDao;
 	
 	@Override
-	public List<BaseVirtualCurrency> processReturnObjectList(String hr){
+	public List<BaseVirtualCurrency> process(String hr){
+		this.domainClass = VirtualCurrency.class;
 		//TODO
 		/*
 		 * 比特币网站数据处理方法
 		 * 
 		 * 返回需要存储的数据对象
 		 */
-		return null;
+//		this.toDB(datas);
+		List<BaseVirtualCurrency> bvcs = new ArrayList<BaseVirtualCurrency>();
+		try {
+			JSONObject obj = new JSONObject(hr);
+			
+			String name1 = "btc";
+			String price1 = obj.getJSONObject("ticker_btccny").getString("sell");
+			BaseVirtualCurrency bvc1 = new BaseVirtualCurrency();
+			bvc1.setCurrentPrice(price1);
+			bvc1.setName(name1);
+			
+			String name2 = "ltc";
+			String price2 = obj.getJSONObject("ticker_ltccny").getString("sell");
+			BaseVirtualCurrency bvc2 = new BaseVirtualCurrency();
+			bvc2.setCurrentPrice(price2);
+			bvc2.setName(name2);
+			
+			bvcs.add(bvc1);
+			bvcs.add(bvc2);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bvcs;
 	}
-	
+
 	@Override
-	public DbResult<?> toDB(List<BaseVirtualCurrency> datas){
-		/*
-		 * TODO
-		 * 定义持久化方法(mysql)
-		 */
-		return null;
+	public List<VirtualCurrency> saveToMysql(List<VirtualCurrency> list) {
+		return virtualCurrencyMysqlDao.save(list);
 	}
 
 }

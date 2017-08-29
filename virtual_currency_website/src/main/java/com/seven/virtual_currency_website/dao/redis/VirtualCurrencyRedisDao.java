@@ -1,5 +1,10 @@
 package com.seven.virtual_currency_website.dao.redis;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +28,27 @@ public class VirtualCurrencyRedisDao <T extends BaseVirtualCurrency, ID> {
 	RedisTemplate<Object, Object> redisTemplate;
 	
 	@Resource(name="redisTemplate")
-	ValueOperations<Object, Object> valOps;
+	ValueOperations<String, T> valOps;
 	
 	
 	public void save(T t){
 		valOps.set(t.getId(), t);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public T getOne(ID id){
 		return (T) valOps.get(id);
+	}
+	
+	public void multiSave(List<T> ts){
+		Map<String, T> m = new HashMap<String, T>();
+		for (T t : ts){
+			m.put(t.getName(), t);
+		}
+		valOps.multiSet(m);
+	}
+	
+	public List<T> multiGet(Collection<String> ids){
+		return valOps.multiGet(ids);
 	}
 
 }
