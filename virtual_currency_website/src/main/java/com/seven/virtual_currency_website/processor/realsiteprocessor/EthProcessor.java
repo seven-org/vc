@@ -21,7 +21,6 @@ public class EthProcessor extends BaseMysqlDataProcessor<VirtualCurrency, Virtua
 	
 	@Override
 	public List<BaseVirtualCurrency> process(String hr){
-		this.domainClass = VirtualCurrency.class;
 		//TODO
 		/*
 		 * 以太坊数据处理方法
@@ -42,6 +41,11 @@ public class EthProcessor extends BaseMysqlDataProcessor<VirtualCurrency, Virtua
 			e.printStackTrace();
 		}
 		return bvcs;
+	}
+
+	@Override
+	public void setClass() {
+		this.domainClass = VirtualCurrency.class;
 	}
 
 	@Override

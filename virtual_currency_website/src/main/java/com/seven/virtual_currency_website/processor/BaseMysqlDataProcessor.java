@@ -13,10 +13,15 @@ public abstract class BaseMysqlDataProcessor<S, T extends JpaRepository<S, ?>> e
 	
 	public Class<S> domainClass;
 	
+	public abstract void setClass();
+	
 	public abstract List<S> saveToMysql(List<S> list);
+	
+	public T mysqlJpaRepository;
 	
 	@Override
 	public DbResult<?> toDB(List<BaseVirtualCurrency> datas){
+		setClass();
 		/*
 		 * 定义持久化方法(mysql)
 		 */
@@ -31,15 +36,17 @@ public abstract class BaseMysqlDataProcessor<S, T extends JpaRepository<S, ?>> e
 			BeanUtils.copyProperties(bvc, vc);
 			vcs.add(vc);
 		}
+		
+		DbResult<List<S>> dr = new DbResult<List<S>>();
 		try {
-			vcs = saveToMysql(vcs);
+//			vcs = saveToMysql(vcs);
+			List<S> list = saveToMysql(vcs);
+			dr.setJpaSaveResult(list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		DbResult<List<S>> dr = new DbResult<List<S>>();
-		dr.setJpaSaveResult(vcs);
 		return dr;
 	}
 	

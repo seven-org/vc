@@ -51,7 +51,7 @@ public class ScheduledTaskService implements InitializingBean, ApplicationContex
 	
 	private Map<String, Class<?>> processorMap;
 
-	@Scheduled(cron = "10 24 12 ? * *")
+	@Scheduled(cron = "10 38 14 ? * *")
 	public void getWebsiteInformation() {
 		
 		//通过httpclient向注册的website发送http 异步 请求

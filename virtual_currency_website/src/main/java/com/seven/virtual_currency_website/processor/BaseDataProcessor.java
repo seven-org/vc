@@ -40,10 +40,11 @@ public abstract class BaseDataProcessor extends AbstractDataProcessor<List<BaseV
 	public void doDataProcess(String str){
 		//处理数据
 		List<BaseVirtualCurrency> datas = process(str);
-		//存入db
-		toDB(datas);
 		
 		try {
+			//存入db
+			toDB(datas);
+			
 			//获取redis中相同key的数据
 			List<BaseVirtualCurrency> bvcs = getDataFromRedis(datas);
 			

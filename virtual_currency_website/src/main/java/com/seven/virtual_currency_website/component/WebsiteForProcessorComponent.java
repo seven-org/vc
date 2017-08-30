@@ -33,9 +33,12 @@ public class WebsiteForProcessorComponent {
 
 	public Map<String, Class<?>> loadProcessMap() {
 		processorMap.clear();
+		//TODO
+		/*
+		 * 手动配置站点和processor的对应关系
+		 */
 		processorMap.put(websiteURL.getBicAndltc(), BicProcessor.class);
 		processorMap.put(websiteURL.getEth(), EthProcessor.class);
-		//TODO
 		return processorMap;
 	}
 	

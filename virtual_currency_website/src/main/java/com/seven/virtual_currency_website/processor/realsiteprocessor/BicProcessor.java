@@ -21,7 +21,6 @@ public class BicProcessor extends BaseMysqlDataProcessor<VirtualCurrency, Virtua
 	
 	@Override
 	public List<BaseVirtualCurrency> process(String hr){
-		this.domainClass = VirtualCurrency.class;
 		//TODO
 		/*
 		 * 比特币网站数据处理方法
@@ -52,6 +51,11 @@ public class BicProcessor extends BaseMysqlDataProcessor<VirtualCurrency, Virtua
 			e.printStackTrace();
 		}
 		return bvcs;
+	}
+
+	@Override
+	public void setClass() {
+		this.domainClass = VirtualCurrency.class;
 	}
 
 	@Override
