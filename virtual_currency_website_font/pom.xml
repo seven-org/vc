@@ -26,8 +26,12 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.seven.virtual_currency_website</groupId>
+			<!-- <groupId>com.seven.virtual_currency_website</groupId>
 			<artifactId>data</artifactId>
+			<version>0.0.1-SNAPSHOT</version> -->
+			
+			<groupId>com.seven.virtual_currency_website</groupId>
+			<artifactId>virtual_currency_website_data</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		

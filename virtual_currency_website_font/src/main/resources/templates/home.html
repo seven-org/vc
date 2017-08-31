@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta content="text/html;charset=UTF-8"/>
+	<!-- <meta content="text/html;charset=UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/> -->
 	<!-- <link th:href="@{bootstrap/css/bootstrap.min.css}" rel="stylesheet"/> -->
 	<!-- <link th:href="@{bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/> -->
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="panel-body">
+	<!-- <div class="panel-body">
 		<ul class="list-group">
 			<li class="list-group-item" th:each="vc:${vcs}">
 				<span th:text="${vc.id}"></span>
@@ -17,9 +17,41 @@
 				<span th:text="${vc.currentPrice}"></span>
 			</li>
 		</ul>
-	</div>
+	</div> -->
 	
-	<!-- <script th:src="@{jquery.min.js}" type="text/javascript"></script>
-	<script th:src="@{bootstrap/js/bootstrap.min.js}" type="text/javascript"></script> -->
+	<script th:src="../static/jquery.min.js" type="text/javascript"></script>
+	<!-- <script th:src="@{bootstrap/js/bootstrap.min.js}" type="text/javascript"></script> -->
+	<!-- <script th:src="../static/sockjs.min.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+	
+	<script src="../static/stomp.js"></script>
+	<script>
+	
+		/* var hostname = "localhost";
+		if (location.search == '?ws') {
+		    var client = Stomp.client('ws://' + hostname + ':15674/ws');
+		} else {
+		    var ws = new SockJS('http://' + hostname + ':15674/stomp');
+		    var client = Stomp.over(ws);
+		} */
+		
+        var client = Stomp.client('ws://localhost:15674/ws');
+		var connect_callback = function() {
+		  // called back after the client is connected and authenticated to the STOMP server
+			console.log("connect_callback");
+		  
+
+			client.subscribe("/topic/stocks", function(message) {
+				console.log(message);
+			});
+			
+		};
+		var error_callback = function(){
+			console.log("error_callback");
+		}
+		
+		client.connect("guest", "guest", connect_callback, error_callback, "/");
+
+	</script>
 </body>
 </html>

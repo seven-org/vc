@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seven.virtual_currency_website.dao.redis.VirtualCurrencyRedisDao;
 import com.seven.virtual_currency_website.entity.vc.BaseVirtualCurrency;
 
@@ -15,6 +19,12 @@ public abstract class BaseDataProcessor extends AbstractDataProcessor<List<BaseV
 	
 	@Autowired
 	private VirtualCurrencyRedisDao<BaseVirtualCurrency, String> virtualCurrencyRedisDao;
+	
+	@Autowired
+	private RabbitTemplate template;
+
+	@Autowired
+	private FanoutExchange fanout;
 	
 	/*
 	 * 从redis获取需要的数据
@@ -61,6 +71,18 @@ public abstract class BaseDataProcessor extends AbstractDataProcessor<List<BaseV
 		
 		//将不重复的数据加入MQ
 		//TODO
+		if (datas.size() != 0){
+			try {
+				ObjectMapper mapper = new ObjectMapper();
+				String jsonMessage = mapper.writeValueAsString(datas);
+				System.out.println(jsonMessage);
+				template.convertAndSend(fanout.getName(), "stocks", jsonMessage);
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 }
