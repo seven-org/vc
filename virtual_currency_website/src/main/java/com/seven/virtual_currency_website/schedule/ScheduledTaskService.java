@@ -50,18 +50,17 @@ public class ScheduledTaskService implements InitializingBean, ApplicationContex
 	private ApplicationContext ac;
 	
 	private Map<String, Class<?>> processorMap;
+	
+	private List<String> websiteURLs;
 
 //	@Scheduled(cron = "10 38 14 ? * *")
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 60000)
 	public void getWebsiteInformation() {
 		
 		//通过httpclient向注册的website发送http 异步 请求
 		CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();
 		// Start the client
 	    httpclient.start();
-		
-		//获取提前注册的websiteURL列表
-		List<String> websiteURLs = websiteForProcessorComponent.websiteURL.getVirtualCurrency();
 		
 		final CountDownLatch latch1 = new CountDownLatch(websiteURLs.size());
 //		List<HttpGet> requests = new ArrayList<HttpGet>(websiteURLs.size());
@@ -86,7 +85,7 @@ public class ScheduledTaskService implements InitializingBean, ApplicationContex
 		            System.out.println(responseString);
 		            
 		            //获取到相应数据后处理数据
-		            ((DefaultDataProcessor<?>) ac.getBean(processorMap.get(URLstr))).doDataProcess(responseString);
+		            ((DefaultDataProcessor) ac.getBean(processorMap.get(URLstr))).process(responseString);
 		        }
 
 		        public void failed(final Exception ex) {
@@ -107,6 +106,8 @@ public class ScheduledTaskService implements InitializingBean, ApplicationContex
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		processorMap = websiteForProcessorComponent.loadProcessMap();
+		//获取提前注册的websiteURL列表
+		websiteURLs = websiteForProcessorComponent.websiteURL.getVirtualCurrency();
 	}
 
 	@Override

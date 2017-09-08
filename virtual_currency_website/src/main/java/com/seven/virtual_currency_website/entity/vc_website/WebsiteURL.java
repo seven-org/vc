@@ -10,32 +10,44 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="website.virtualCurrency")
 public class WebsiteURL {
 	
-	private String bicAndltc;
+	private String jubibtc;
+
+	public String getJubibtc() {
+		return jubibtc;
+	}
+
+	public void setJubibtc(String jubibtc) {
+		this.jubibtc = jubibtc;
+	}
 	
-	private String eth;
-	
-	public String getBicAndltc() {
-		return bicAndltc;
-	}
-
-	public void setBicAndltc(String bicAndltc) {
-		this.bicAndltc = bicAndltc;
-	}
-
-	public String getEth() {
-		return eth;
-	}
-
-	public void setEth(String eth) {
-		this.eth = eth;
-	}
-
+//	
+//	private String bicAndltc;
+//	
+//	private String eth;
+//	
+//	public String getBicAndltc() {
+//		return bicAndltc;
+//	}
+//
+//	public void setBicAndltc(String bicAndltc) {
+//		this.bicAndltc = bicAndltc;
+//	}
+//
+//	public String getEth() {
+//		return eth;
+//	}
+//
+//	public void setEth(String eth) {
+//		this.eth = eth;
+//	}
+//
 	List<String> virtualCurrency = new ArrayList<String>();
 
 	public List<String> getVirtualCurrency() {
 		
-		virtualCurrency.add(eth);
-		virtualCurrency.add(bicAndltc);
+//		virtualCurrency.add(eth);
+//		virtualCurrency.add(bicAndltc);
+		virtualCurrency.add(jubibtc);
 		
 		return virtualCurrency;
 	}

@@ -6,11 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.seven.virtual_currency_website.entity.vc_website.BaseVirtualCurrencyWebsite;
 import com.seven.virtual_currency_website.entity.vc_website.WebsiteURL;
-import com.seven.virtual_currency_website.processor.AbstractDataProcessor;
-import com.seven.virtual_currency_website.processor.realsiteprocessor.BicProcessor;
-import com.seven.virtual_currency_website.processor.realsiteprocessor.EthProcessor;
+import com.seven.virtual_currency_website.processor.realsiteprocessor.JubiJsonProcessor;
 
 /*
  * 将网站站点与processor匹配，并放入map
@@ -37,8 +34,9 @@ public class WebsiteForProcessorComponent {
 		/*
 		 * 手动配置站点和processor的对应关系
 		 */
-		processorMap.put(websiteURL.getBicAndltc(), BicProcessor.class);
-		processorMap.put(websiteURL.getEth(), EthProcessor.class);
+//		processorMap.put(websiteURL.getBicAndltc(), BicProcessor.class);
+//		processorMap.put(websiteURL.getEth(), EthProcessor.class);
+		processorMap.put(websiteURL.getJubibtc(), JubiJsonProcessor.class);
 		return processorMap;
 	}
 	

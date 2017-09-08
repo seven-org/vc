@@ -8,6 +8,10 @@ spring:
 #      ddl-auto: update
 #    show-sql: true
   redis:
+#    cluster:
+#      nodes:
+#      - 
+#      max-redirects: 3
     database: 0
     host: localhost
     password: 
@@ -17,15 +21,16 @@ spring:
       min-idle: 0
       max-active: 8
       max-wait: -1
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
     
 debug: true
 
 website: 
   virtualCurrency: 
-    bicAndltc: https://data.btcchina.com/data/ticker?market=all
-    eth: https://plus-api.btcchina.com/market/ticker?symbol=ETHCNY
+#    bicAndltc: https://data.btcchina.com/data/ticker?market=all
+#    eth: https://plus-api.btcchina.com/market/ticker?symbol=ETHCNY
+    jubibtc: https://www.jubi.com/coin/btc/order

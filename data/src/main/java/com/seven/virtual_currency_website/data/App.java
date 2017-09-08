@@ -1,6 +1,5 @@
 package com.seven.virtual_currency_website.data;
 
-import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.persistence.EntityManager;
@@ -8,15 +7,20 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -116,5 +120,39 @@ public class App {
 //	public NamedParameterJdbcTemplate namedParameterJdbcTemplate() throws SQLException {
 //		return new NamedParameterJdbcTemplate(this.getPreferentialDataSource());
 //	}
+	
+	//////////////////////////////////redis///////////////////////////////////////////////////
+	private @Value("${redis.host}") String redisHost;
+    private @Value("${redis.port}") int redisPort;
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public JedisConnectionFactory jedisConnectionFactory() {
+        JedisConnectionFactory factory = new JedisConnectionFactory();
+        factory.setHostName(redisHost);
+        factory.setPort(redisPort);
+        factory.setUsePool(true);
+        return factory;
+    }
+
+    @Bean
+    public RedisTemplate< String, Object > redisTemplate() {
+        final RedisTemplate< String, Object > template =  new RedisTemplate< String, Object >();
+        template.setConnectionFactory( jedisConnectionFactory() );
+        template.setKeySerializer( new StringRedisSerializer() );
+        template.setHashValueSerializer( new GenericToStringSerializer< Object >( Object.class ) );
+        template.setValueSerializer( new GenericToStringSerializer< Object >( Object.class ) );
+        return template;
+    }
+    
+//    @Bean
+//    public StringRedisTemplate stringRedisTemplate(){
+//       StringRedisTemplate redisTemplate = new StringRedisTemplate(jedisConnectionFactory());
+//       return redisTemplate;
+//    }
 
 }
