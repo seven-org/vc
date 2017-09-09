@@ -1,8 +1,17 @@
 package com.seven.virtual_currency_website.domain;
 
-//@Entity
-public class JubiJsonObject {
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
+public abstract class JubiJsonObject {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long id;
+	
 	public String time;
 	
 	public double price;

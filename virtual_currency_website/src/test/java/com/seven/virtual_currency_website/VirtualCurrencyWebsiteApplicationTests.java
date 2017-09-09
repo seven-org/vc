@@ -94,7 +94,8 @@ public class VirtualCurrencyWebsiteApplicationTests {
 		return bvc;
 	}
 	public JubiJsonObject jsonarrayToObject(JSONArray ja){
-		return new JubiJsonObject(ja.getString(0), ja.getDouble(1), ja.getDouble(2), ja.getString(3), ja.getString(4));
+//		return new JubiJsonObject(ja.getString(0), ja.getDouble(1), ja.getDouble(2), ja.getString(3), ja.getString(4));
+		return null;
 	}
 	
 	public void test1() throws Exception {

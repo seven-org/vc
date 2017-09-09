@@ -11,19 +11,16 @@ public abstract class BaseDefaultDataProcessor<D> extends AbstractDefaultDataPro
 	//数据去重操作
 	/*
 	 * 2.若此时cache中包含数据  则从cache取出最新的数据(根据key列表)
-	 * 		3.将cache中数据与步骤1中处理完成的数据进行比对，去除重复的数据
 	 * 		4.将所有数据放入cache
+	 * 		3.将cache中数据与步骤1中处理完成的数据进行比对，去除重复的数据
 	 * 返回去重后的数据
 	 */
 	public D dataReduce(D datas){
 		assert(datas!=null);
 		D dataFromCache = getDataFromCache(datas);
-		D comparedDatas = datas;
-		if (dataFromCache != null){
-			comparedDatas = compareReduce(datas, dataFromCache);
-		}
 		toCache(datas);
-		return comparedDatas;
+		compareReduce(datas, dataFromCache);
+		return datas;
 	}
 	
 	//存入cache

@@ -14,6 +14,9 @@ public abstract class AbstractDefaultDataProcessor<D> implements DefaultDataProc
 	 */
 	@Override
 	public void process(String data){
+		/*
+		 * loaded 和 reduced 为同一个对象的两个不同时期的两个引用
+		 */
 		D loaded = doDataProcess(data);
 		D reduced = dataReduce(loaded);
 		toDB(reduced);

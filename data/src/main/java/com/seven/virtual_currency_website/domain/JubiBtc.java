@@ -1,30 +1,11 @@
 package com.seven.virtual_currency_website.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "jubi_btc")
-public class JubiBtc{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
-
-	public String time;
-	
-	public double price;
-	
-	public double count;
-	
-	public String operation;
-	
-	public String day;
-
-	public String source = "jubi";
+public class JubiBtc extends JubiJsonObject{
 	
 	public String type = "btc";
 	
@@ -41,61 +22,61 @@ public class JubiBtc{
 		this.day = day;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public double getCount() {
-		return count;
-	}
-
-	public void setCount(double count) {
-		this.count = count;
-	}
-
-	public String getOperation() {
-		return operation;
-	}
-
-	public void setOperation(String operation) {
-		this.operation = operation;
-	}
-
-	public String getDay() {
-		return day;
-	}
-
-	public void setDay(String day) {
-		this.day = day;
-	}
-
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
+//	public Long getId() {
+//		return id;
+//	}
+//
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
+//
+//	public String getTime() {
+//		return time;
+//	}
+//
+//	public void setTime(String time) {
+//		this.time = time;
+//	}
+//
+//	public double getPrice() {
+//		return price;
+//	}
+//
+//	public void setPrice(double price) {
+//		this.price = price;
+//	}
+//
+//	public double getCount() {
+//		return count;
+//	}
+//
+//	public void setCount(double count) {
+//		this.count = count;
+//	}
+//
+//	public String getOperation() {
+//		return operation;
+//	}
+//
+//	public void setOperation(String operation) {
+//		this.operation = operation;
+//	}
+//
+//	public String getDay() {
+//		return day;
+//	}
+//
+//	public void setDay(String day) {
+//		this.day = day;
+//	}
+//
+//	public String getSource() {
+//		return source;
+//	}
+//
+//	public void setSource(String source) {
+//		this.source = source;
+//	}
 
 	public String getType() {
 		return type;
