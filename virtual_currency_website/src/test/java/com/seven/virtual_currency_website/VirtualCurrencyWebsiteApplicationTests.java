@@ -26,7 +26,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.seven.virtual_currency_website.domain.JubiJsonObject;
-import com.seven.virtual_currency_website.entity.vc.BaseVirtualCurrency;
 
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
@@ -80,19 +79,17 @@ public class VirtualCurrencyWebsiteApplicationTests {
 		System.out.println(obj);
 		System.out.println(ja);
 		
-		List<BaseVirtualCurrency> bvclist = new ArrayList<BaseVirtualCurrency>();
-
 	}
 	
-	public BaseVirtualCurrency jsonarrayToBaseVirtualCurrency(JSONArray ja){
-		BaseVirtualCurrency bvc = new BaseVirtualCurrency();
-		bvc.setTime(ja.getString(0));
-		bvc.setPrice(ja.getDouble(1));
-		bvc.setDoubleCount(ja.getDouble(2));
-		bvc.setOperation(ja.getString(3));
-		bvc.setDay(ja.getString(4));
-		return bvc;
-	}
+//	public BaseVirtualCurrency jsonarrayToBaseVirtualCurrency(JSONArray ja){
+//		BaseVirtualCurrency bvc = new BaseVirtualCurrency();
+//		bvc.setTime(ja.getString(0));
+//		bvc.setPrice(ja.getDouble(1));
+//		bvc.setDoubleCount(ja.getDouble(2));
+//		bvc.setOperation(ja.getString(3));
+//		bvc.setDay(ja.getString(4));
+//		return bvc;
+//	}
 	public JubiJsonObject jsonarrayToObject(JSONArray ja){
 //		return new JubiJsonObject(ja.getString(0), ja.getDouble(1), ja.getDouble(2), ja.getString(3), ja.getString(4));
 		return null;
