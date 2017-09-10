@@ -12,7 +12,7 @@
 	<packaging>jar</packaging>
 
 	<name>back_end</name>
-	<description>Demo project for Spring Boot</description>
+	<description>vc back end module</description>
 
 	<dependencies>
 		<dependency>
