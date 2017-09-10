@@ -26,8 +26,8 @@
   <modules>  
 	<module>data</module>  
 	<module>back_end</module>  
-	<module>font_end</module>  
-  </modules> 
+	<module>font_end</module>
+  </modules>
 	
   <dependencies>
     <dependency>
