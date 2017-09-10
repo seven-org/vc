@@ -6,7 +6,7 @@
 		<groupId>com.seven.vc</groupId>
 		<artifactId>vc_project</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../vc_project/pom.xml</relativePath>
 	</parent>
 	<artifactId>back_end</artifactId>
 	<packaging>jar</packaging>
