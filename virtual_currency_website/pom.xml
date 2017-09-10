@@ -10,7 +10,7 @@
 	<artifactId>back_end</artifactId>
 	<packaging>jar</packaging>
 
-	<name>virtual_currency_website</name>
+	<name>back_end</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

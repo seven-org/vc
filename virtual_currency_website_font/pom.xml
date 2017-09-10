@@ -10,7 +10,7 @@
 	<artifactId>font_end</artifactId>
 	<packaging>jar</packaging>
 
-	<name>virtual_currency_website_font</name>
+	<name>font_end</name>
 	<description>Demo project for Spring Boot</description>
 
 	<dependencies>
