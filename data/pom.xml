@@ -4,12 +4,17 @@
 
   <groupId>com.seven.virtual_currency_website</groupId>
   <artifactId>data</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>data</name>
   <url>http://maven.apache.org</url>
 
+  <parent>
+	  <groupId>com.seven.vc</groupId>
+	  <artifactId>vc_project</artifactId>
+	  <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -70,12 +75,5 @@
 		<artifactId>log4j</artifactId>
 		<version>1.2.17</version>
 	</dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>

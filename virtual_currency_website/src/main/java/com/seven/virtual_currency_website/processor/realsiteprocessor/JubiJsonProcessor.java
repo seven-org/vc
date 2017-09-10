@@ -38,7 +38,6 @@ public class JubiJsonProcessor extends ListBaseDefaultDataProcessor<JubiBtc>{
 
 	@Override
 	public List<JubiBtc> getDataFromCache(List<JubiBtc> datas) {
-		// TODO Auto-generated method stub
 		ObjectMapper mapper = new ObjectMapper(); // just need one
 		List<JubiBtc> jbList = null;
 		String str = redisDao.get(redis_key);

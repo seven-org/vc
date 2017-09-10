@@ -16,6 +16,7 @@ public class RedisDao {
 	
 	
 	public void save(String key, Object obj){
+//		redisTemplate.
 		redisTemplate.opsForValue().set(key, obj);
 	}
 	
